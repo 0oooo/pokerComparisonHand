@@ -134,7 +134,8 @@ class Hand:
             self.suitAllCards.append(card.getSuit())
 
         # sort the values in descending orders to facilitate future comparisons
-        sorted(self.valueAllCards, key=int, reverse=True)
+##        sorted(self.valueAllCards, key=int, reverse=True)
+        self.valueAllCards.sort(reverse=True)
 
     # Compare the number of distinct cards, check the possible score and assign it to the hand
     # set highest card directly or as a side effect of hasSimilar() method
@@ -223,7 +224,7 @@ class Hand:
                         del cards[i]
                         self.highest.append(pairCard)    # Highest for double pair is 1st pair, 2nd pair, last element
                         self.highest.append(otherPair)   # The 1st pair is > 2nd because the list is sorted
-                        self.highest.extend(cards)
+                        self.highest.append(cards[0])
                         return 22
 
                     # Double pair
@@ -233,7 +234,7 @@ class Hand:
                         del cards[i + 1]
                         self.highest.append(pairCard)
                         self.highest.append(otherPair)
-                        self.highest.extend(cards)
+                        self.highest.append(cards[0])
                         return 22
 
                     # Pair
@@ -307,11 +308,11 @@ class Hand:
                 if self.highest[i] > hand2.highest[i]:
                     self.status = self.Ranking.WIN
                     hand2.status = hand2.Ranking.LOSS
-                    break
+                    return
                 elif self.highest[i] < hand2.highest[i]:
                     self.status = self.Ranking.LOSS
                     hand2.status = hand2.Ranking.WIN
-                    break
+                    return
             self.status = self.Ranking.TIE
             hand2.status = hand2.Ranking.TIE
 

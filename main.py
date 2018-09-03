@@ -8,7 +8,7 @@ if __name__ == '__main__':
         print("First hand error: " + str(e))
 
     try:
-        hand2 = Hand("Ah Kh Qh Js Tc")
+        hand2 = Hand("Ah Ad Kh Ks 2c")
 
     except Exception as e:
         print("Second hand error: " + str(e))
